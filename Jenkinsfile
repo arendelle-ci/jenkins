@@ -14,7 +14,7 @@ node {
     }
 
     stage('Build image'){
-        app = docker.build("211.183.3.100/web/production:1.0")
+        app = docker.build("211.183.3.100/test/production:1.0")
     }
 
     stage('Push image') {
