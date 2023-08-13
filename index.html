@@ -1,1 +1,26 @@
-hi i'm index
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    transition: background-color 1s ease;
+  }
+</style>
+</head>
+<body>
+
+<button onclick="changeColor()">Change Color</button>
+
+<script>
+function changeColor() {
+  var body = document.body;
+  if (body.style.backgroundColor === 'red') {
+    body.style.backgroundColor = 'blue';
+  } else {
+    body.style.backgroundColor = 'red';
+  }
+}
+</script>
+
+</body>
+</html>
