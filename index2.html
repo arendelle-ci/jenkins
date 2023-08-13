@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    transition: background-color 1s ease;
+  }
+</style>
+</head>
+<body>
+
+<button onclick="changeColor()">Change Color</button>
+
+<script>
+function changeColor() {
+  var body = document.body;
+  if (body.style.backgroundColor === 'green') {
+    body.style.backgroundColor = 'yellow';
+  } else {
+    body.style.backgroundColor = 'green';
+  }
+}
+</script>
+
+</body>
+</html>
