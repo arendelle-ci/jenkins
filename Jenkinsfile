@@ -1,11 +1,6 @@
 def app
 
 node {
-    stage('Start') {
-        steps {
-            slackSend (channel: '#slack-jenkins', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-        }
-    }
     stage('Checkout') {
             checkout scm
     }
@@ -38,6 +33,5 @@ node {
         failure {
             slackSend (channel: '#slack-jenkins', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
-    }
-    
+    } 
   }
