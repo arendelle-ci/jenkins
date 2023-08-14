@@ -23,17 +23,18 @@ node {
         }
     }
 
+    stage('slack') {
+        post {
+            success {
+                slackSend (channel: '#slack-jenkins', color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            }
+            failure {
+                slackSend (channel: '#slack-jenkins', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            }
+        }
+    }
+
     stage('Complete') {
         sh "echo 'The end'"
     }
-
-    post {
-        success {
-            slackSend (channel: '#slack-jenkins', color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-        }
-        failure {
-            slackSend (channel: '#slack-jenkins', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-        }
-    }
-
-  }
+}
