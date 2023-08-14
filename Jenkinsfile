@@ -14,12 +14,12 @@ node {
     }
 
     stage('Build image'){
-        app = docker.build("211.183.3.100/web/production")
+        app = docker.build("211.183.3.100/web/canary")
     }
 
     stage('Push image') {
         docker.withRegistry("http://211.183.3.100", "harbor") {
-            app.push("2.0")
+            app.push("1.0")
         }
     }
     post {
