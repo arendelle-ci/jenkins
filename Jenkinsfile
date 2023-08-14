@@ -1,32 +1,33 @@
 def app
 
-pipeline {
-    agent any
-    stages{
-        stage('Start') {
-            steps {
-                slackSend (channel: '#slack-jenkins', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            }
-        }
-        stage('Checkout') {
+node {
+    stage('Checkout') {
             checkout scm
+    }
+
+    stage('Start') {
+        slackSend(channel: '#slack-jenkins', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+    }
+
+    stage('Ready'){
+        sh "echo 'Ready to build'"
+    }
+
+    stage('Build'){
+        sh "echo 'Build Spring Boot Jar'"
+    }
+
+    stage('Build image'){
+        app = docker.build("211.183.3.100/web/production")
+    }
+
+    stage('Push image') {
+        docker.withRegistry("http://211.183.3.100", "harbor") {
+            app.push("2.0")
         }
-        stage('Ready'){
-            sh "echo 'Ready to build'"
-        }
-        stage('Build'){
-            sh "echo 'Build Spring Boot Jar'"
-        }
-        stage('Build image'){
-            app = docker.build("211.183.3.100/web/production")
-        }
-        stage('Push image') {
-            docker.withRegistry("http://211.183.3.100", "harbor") {
-                app.push("2.0")
-            }
-        }
-        stage('Complete') {
-            sh "echo 'The end'"
-        }
+    }
+
+    stage('Complete') {
+        sh "echo 'The end'"
     }
   }
