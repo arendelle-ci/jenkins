@@ -2,10 +2,9 @@ def app
 
 node {
     stage('Start') {
-            agent any
-            steps {
-                slackSend (channel: '#slack-jenkins', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            }
+        steps {
+            slackSend (channel: '#slack-jenkins', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
     }
     stage('Checkout') {
             checkout scm
