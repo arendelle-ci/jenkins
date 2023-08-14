@@ -18,7 +18,7 @@ node {
     }
 
     stage('Push image') {
-        docker.withRegistry("http://211.183.3.100", "harbor") {
+        docker.withRegistry("http://211.183.3.100", "harbor2") {
             app.push("02")
         }
     }
