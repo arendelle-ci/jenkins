@@ -25,7 +25,7 @@ pipeline {
         stage('Build image'){
             steps {
                 script {
-                    app = docker.build("211.183.3.100/web/production")
+                    app = docker.build("211.183.3.100/web/canary")
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("http://211.183.3.100", "harbor") {
-                        app.push("2.0")
+                        app.push("3.0")
                     }
                 }
             }
