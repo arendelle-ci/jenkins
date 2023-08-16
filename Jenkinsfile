@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("http://211.183.3.100", "harbor") {
-                        app.push("2.0")
+                        app.push("5.0")
                     }
                 }
             }
